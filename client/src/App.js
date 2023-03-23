@@ -2,7 +2,7 @@ import logo from './logo.svg';
 import './App.css';
 
 import Header from "./components/Header";
-import Footer from "./componets/Footer";
+import Footer from "./components/Footer";
 import { Container } from "react-bootstrap";
 import {
   ApolloClient,
@@ -24,42 +24,28 @@ const httpLink = createHttpLink({
 });
 
 const client = new ApolloClient({
-  link: authLink.concat(httpLink),
+  link: httpLink,
   cache: new InMemoryCache(),
 }
 )
 
 function App() {
-  const style = {
-    background: {
-      backgroundColor: 'whitesmoke',
-      height: "100vh",
-      width: "100vw",
-      position: 'fixed',
-      top: 0,
-      left: 0, 
-
-    }
-  }
   return (
-    <ApolloProvider client = {client}>
+    <ApolloProvider client={client}>
       <Router>
-        <div style = {style.background}>
+        <div className="area">
           <Header />
-          <Container>
+          <div className = 'routeContainer'>
             <Routes>
-            <Route path = "/" element = {<Home/>} />
-            <Route path = "/about" element = {<About/>} />
-             <Route path = "/about" element = {<Shop/>} />
-          </Routes>
-          </Container>
+              <Route path="/" element={<Home />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/shop" element={<Shop />} />
+            </Routes>
+          </div>
           <Footer />
-       
         </div>
       </Router>
     </ApolloProvider>
-    
-
   );
 }
 
